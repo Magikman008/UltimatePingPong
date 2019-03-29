@@ -14,37 +14,28 @@ import javafx.scene.text.TextAlignment;
 
 public class Main extends Application {
 	
-	// размер поля
 	private static final int width = 800;
 	private static final int height = 600;
 	
-	// ширина и высота ракетки
 	private static final int RACKET_WIDTH = 10;
 	private static final int RACKET_HEIGHT = 90;
 	
-	// диаметр мяча
 	private static final int rad = 30;
 	
-	// начальные координаты ракетки игрока
 	double playerX = 0;
 	double playerY = height/2;
 	
-	// начальные координаты ракетки компа
 	double compX = width - RACKET_WIDTH;
 	double compY = height/2;
 	
-	// координаты мяча
 	double ballX = width/2 - rad/2;
 	double ballY = height/2 - rad/2;
 	
-	// инструмент рисовани¤
 	GraphicsContext gc;
 	
-	// скорость мяча
 	double ballYSpeed = 3;
 	double ballXSpeed = 3;
 	
-	// игровой цикл
 	boolean gameStarted;
 	
 	int comp = 0;
@@ -54,15 +45,12 @@ public class Main extends Application {
 	double mouse;
 	
 	private void drawTable() {
-		// рисуем поле
 		gc.setFill(Color.BLACK);
-		gc.fillRect(0, 0, width, height);			
-		// рисуем разделительную линию
+		gc.fillRect(0, 0, width, height);	
 		gc.setFill(Color.WHITE);
 		gc.fillRect(width/2-1, 0, 2, height);		
 		gc.strokeText(strplay, width/2-10, 10);
 		gc.strokeText(strcomp, width/2+10, 10);
-		// рисуем м¤ч
 		if(gameStarted) {
 			ballX+=ballXSpeed;
 			ballY+=ballYSpeed;
@@ -95,7 +83,7 @@ public class Main extends Application {
 			ballXSpeed = ballXSpeed * (-1);
 		}
 		if(ballX>width) {
-			gameStarted=false;
+			gameStarted = false;
 			compX = width - RACKET_WIDTH;
 			compY = height/2;
 			ballX = width/2 - rad/2;
@@ -105,7 +93,6 @@ public class Main extends Application {
 			ballXSpeed=ballXSpeed * (-1);
 		}
 	
-		// рисуем ракетки
 		gc.fillRect(playerX, playerY, RACKET_WIDTH, RACKET_HEIGHT);
 		gc.fillRect(compX, compY, RACKET_WIDTH, RACKET_HEIGHT);
 		if (ballX + rad/2>  compX - RACKET_WIDTH) {
